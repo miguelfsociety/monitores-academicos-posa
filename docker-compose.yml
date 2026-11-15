@@ -1,0 +1,23 @@
+# Servidor 1 (PC1): interfaz HTML/CSS/JS + Controlador Java.
+name: posa-java
+
+services:
+  controlador-java:
+    build:
+      context: .
+    image: posa-java-controlador
+    restart: unless-stopped
+    environment:
+      # URL del servicio PHP (PC2). Se define en el archivo .env.
+      PHP_SERVICE_URL: ${PHP_SERVICE_URL:-http://host.docker.internal:8081}
+    ports:
+      - "${PUERTO:-8080}:8080"
+    extra_hosts:
+      # Permite usar host.docker.internal cuando todo se prueba en un solo equipo.
+      - "host.docker.internal:host-gateway"
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 10.213.1.0/24

@@ -1,0 +1,475 @@
+/* Estilos de la interfaz de gestión de monitores académicos. */
+
+:root {
+  --azul: #0b3c6f;
+  --azul-claro: #e7eef6;
+  --dorado: #c9a227;
+  --fondo: #f4f5f7;
+  --superficie: #ffffff;
+  --texto: #1f2933;
+  --texto-suave: #5b6770;
+  --borde: #d5dae0;
+  --exito: #1e7b4c;
+  --exito-fondo: #e6f4ec;
+  --error: #b3261e;
+  --error-fondo: #fbeaea;
+  --radio: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--texto);
+  background: var(--fondo);
+}
+
+.contenedor {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ---------- Encabezado y pie ---------- */
+
+.encabezado {
+  background: var(--azul);
+  color: #ffffff;
+  padding: 20px 0;
+  border-bottom: 4px solid var(--dorado);
+}
+
+.encabezado h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.encabezado p {
+  margin: 2px 0 0;
+  color: #d6e2ef;
+}
+
+.pie {
+  margin-top: 24px;
+  padding: 16px 0;
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+  text-align: center;
+}
+
+main {
+  padding-top: 20px;
+}
+
+/* ---------- Tarjetas ---------- */
+
+.tarjeta {
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 18px 20px;
+  margin-bottom: 18px;
+}
+
+.tarjeta h2 {
+  margin: 0 0 14px;
+  font-size: 1.1rem;
+  color: var(--azul);
+}
+
+.fila-titulo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.fila-titulo h2 {
+  margin: 0;
+}
+
+.columnas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.nota {
+  margin: 10px 0 0;
+  font-size: 0.9rem;
+  color: var(--texto-suave);
+}
+
+.oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* ---------- Formularios ---------- */
+
+.campo {
+  margin-bottom: 12px;
+}
+
+label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 9px 10px;
+  font: inherit;
+  color: var(--texto);
+  background: #ffffff;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+}
+
+input:focus,
+select:focus,
+button:focus-visible {
+  outline: 2px solid var(--azul);
+  outline-offset: 1px;
+}
+
+input:disabled {
+  background: #eef0f2;
+  color: var(--texto-suave);
+}
+
+input.invalido,
+select.invalido {
+  border-color: var(--error);
+}
+
+.error-campo {
+  display: block;
+  min-height: 1.1em;
+  font-size: 0.8rem;
+  color: var(--error);
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.busqueda {
+  display: flex;
+  gap: 10px;
+}
+
+.busqueda input {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ---------- Botones ---------- */
+
+.boton {
+  padding: 9px 16px;
+  font: inherit;
+  font-weight: 600;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.boton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.boton.primario {
+  background: var(--azul);
+  color: #ffffff;
+}
+
+.boton.primario:hover:not(:disabled) {
+  background: #092f57;
+}
+
+.boton.secundario {
+  background: #ffffff;
+  color: var(--azul);
+  border-color: var(--azul);
+}
+
+.boton.secundario:hover:not(:disabled) {
+  background: var(--azul-claro);
+}
+
+.boton.peligro {
+  background: #ffffff;
+  color: var(--error);
+  border-color: var(--error);
+}
+
+.boton.peligro:hover:not(:disabled) {
+  background: var(--error-fondo);
+}
+
+.boton.pequeno {
+  padding: 5px 10px;
+  font-size: 0.85rem;
+}
+
+/* ---------- Mensajes ---------- */
+
+.mensaje {
+  position: relative;
+  padding: 12px 44px 12px 16px;
+  margin-bottom: 18px;
+  border: 1px solid;
+  border-left-width: 5px;
+  border-radius: var(--radio);
+}
+
+.mensaje p {
+  margin: 0;
+  font-weight: 600;
+}
+
+.mensaje ul {
+  margin: 6px 0 0;
+  padding-left: 20px;
+}
+
+.mensaje ul:empty {
+  display: none;
+}
+
+.mensaje.exito {
+  color: var(--exito);
+  background: var(--exito-fondo);
+  border-color: var(--exito);
+}
+
+.mensaje.error {
+  color: var(--error);
+  background: var(--error-fondo);
+  border-color: var(--error);
+}
+
+.cerrar {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  padding: 2px 6px;
+  font-size: 1.3rem;
+  line-height: 1;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* ---------- Recorrido ---------- */
+
+.recorrido {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recorrido li {
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--texto-suave);
+  background: #eef0f2;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+}
+
+.recorrido li + li {
+  margin-left: 30px;
+  position: relative;
+}
+
+.recorrido li + li::before {
+  content: "\2192";
+  position: absolute;
+  left: -23px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--texto-suave);
+  font-weight: 400;
+}
+
+.recorrido li.activo {
+  color: #ffffff;
+  background: var(--azul);
+  border-color: var(--azul);
+}
+
+.identificador {
+  display: inline-block;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.82rem;
+  word-break: break-all;
+}
+
+/* ---------- Estado de la cadena (salud) ---------- */
+
+.salud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding: 12px 0 0;
+  list-style: none;
+  border-top: 1px solid var(--borde);
+}
+
+.salud li {
+  padding: 6px 12px;
+  font-size: 0.88rem;
+  border: 1px solid var(--borde);
+  border-left-width: 5px;
+  border-radius: 6px;
+  background: #fafbfc;
+}
+
+.salud li strong {
+  margin-right: 6px;
+}
+
+.salud li.ok {
+  border-left-color: var(--exito);
+}
+
+.salud li.fallo {
+  border-left-color: var(--error);
+  color: var(--error);
+}
+
+.salud li.desconocido {
+  border-left-color: #9aa5b1;
+  color: var(--texto-suave);
+}
+
+/* ---------- Resultado de la búsqueda ---------- */
+
+.resultado {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: var(--azul-claro);
+  border-radius: 6px;
+}
+
+.resultado dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 14px;
+  margin: 0;
+}
+
+.resultado dt {
+  font-weight: 600;
+  color: var(--azul);
+}
+
+.resultado dd {
+  margin: 0;
+  word-break: break-word;
+}
+
+/* ---------- Tabla ---------- */
+
+.tabla-contenedor {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 9px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--borde);
+  vertical-align: middle;
+}
+
+th {
+  font-size: 0.85rem;
+  color: var(--azul);
+  background: var(--azul-claro);
+  white-space: nowrap;
+}
+
+tbody tr:hover {
+  background: #fafbfc;
+}
+
+td.celda-acciones {
+  white-space: nowrap;
+}
+
+td.celda-acciones .boton + .boton {
+  margin-left: 6px;
+}
+
+/* ---------- Pantallas pequeñas ---------- */
+
+@media (max-width: 760px) {
+  .columnas {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .encabezado h1 {
+    font-size: 1.3rem;
+  }
+
+  .tarjeta {
+    padding: 14px;
+  }
+
+  .busqueda {
+    flex-direction: column;
+  }
+
+  .recorrido li {
+    padding: 5px 10px;
+    font-size: 0.82rem;
+  }
+
+  .recorrido li + li {
+    margin-left: 22px;
+  }
+
+  .recorrido li + li::before {
+    left: -18px;
+  }
+}

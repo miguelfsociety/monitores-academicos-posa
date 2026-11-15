@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gestión de monitores académicos</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <header class="encabezado">
+    <div class="contenedor">
+      <h1>Gestión de monitores académicos</h1>
+      <p>Universidad de Caldas</p>
+    </div>
+  </header>
+
+  <main class="contenedor">
+
+    <!-- Recorrido de la última operación y estado de la cadena de servicios -->
+    <section class="tarjeta" aria-labelledby="titulo-recorrido">
+      <div class="fila-titulo">
+        <h2 id="titulo-recorrido">Recorrido de la última operación</h2>
+        <button type="button" id="btn-salud" class="boton secundario">Probar conexión</button>
+      </div>
+
+      <ol id="recorrido" class="recorrido">
+        <li data-eslabon="interfaz">Interfaz</li>
+        <li data-eslabon="java">Java</li>
+        <li data-eslabon="php">PHP</li>
+        <li data-eslabon="python">Python</li>
+        <li data-eslabon="bd">BD</li>
+      </ol>
+      <p class="nota">
+        <span id="recorrido-operacion">Todavía no se ha realizado ninguna operación.</span>
+        <span id="recorrido-id" class="identificador"></span>
+      </p>
+
+      <ul id="salud" class="salud" hidden></ul>
+    </section>
+
+    <!-- Mensajes de éxito y de error -->
+    <div id="mensaje" class="mensaje" role="status" aria-live="polite" hidden>
+      <p id="mensaje-texto"></p>
+      <ul id="mensaje-detalles"></ul>
+      <button type="button" id="mensaje-cerrar" class="cerrar" aria-label="Cerrar mensaje">&times;</button>
+    </div>
+
+    <div class="columnas">
+
+      <!-- Formulario de registro y edición -->
+      <section class="tarjeta" aria-labelledby="titulo-formulario">
+        <h2 id="titulo-formulario">Registrar monitor</h2>
+
+        <form id="formulario" novalidate>
+          <div class="campo">
+            <label for="codigo">Código</label>
+            <input type="text" id="codigo" name="codigo" maxlength="20" autocomplete="off" required>
+            <small class="error-campo" id="error-codigo"></small>
+          </div>
+
+          <div class="campo">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre_completo" maxlength="120" autocomplete="off" required>
+            <small class="error-campo" id="error-nombre"></small>
+          </div>
+
+          <div class="campo">
+            <label for="correo">Correo electrónico</label>
+            <input type="email" id="correo" name="correo" maxlength="120" autocomplete="off" required>
+            <small class="error-campo" id="error-correo"></small>
+          </div>
+
+          <div class="campo">
+            <label for="materia">Materia</label>
+            <select id="materia" name="materia_id" required>
+              <option value="">Cargando materias…</option>
+            </select>
+            <small class="error-campo" id="error-materia"></small>
+          </div>
+
+          <div class="acciones">
+            <button type="submit" id="btn-guardar" class="boton primario">Registrar</button>
+            <button type="button" id="btn-cancelar" class="boton secundario" hidden>Cancelar edición</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Búsqueda de un monitor por código -->
+      <section class="tarjeta" aria-labelledby="titulo-busqueda">
+        <h2 id="titulo-busqueda">Consultar por código</h2>
+
+        <form id="form-busqueda" class="busqueda" novalidate>
+          <label for="buscar-codigo" class="oculto">Código del monitor</label>
+          <input type="text" id="buscar-codigo" maxlength="20" placeholder="Código del monitor" autocomplete="off">
+          <button type="submit" class="boton primario">Buscar</button>
+        </form>
+
+        <div id="resultado" class="resultado" hidden>
+          <dl>
+            <dt>Código</dt><dd id="res-codigo"></dd>
+            <dt>Nombre completo</dt><dd id="res-nombre"></dd>
+            <dt>Correo electrónico</dt><dd id="res-correo"></dd>
+            <dt>Materia</dt><dd id="res-materia"></dd>
+          </dl>
+        </div>
+        <p id="resultado-vacio" class="nota" hidden></p>
+      </section>
+
+    </div>
+
+    <!-- Tabla con todos los monitores -->
+    <section class="tarjeta" aria-labelledby="titulo-tabla">
+      <div class="fila-titulo">
+        <h2 id="titulo-tabla">Monitores registrados</h2>
+        <button type="button" id="btn-recargar" class="boton secundario">Actualizar lista</button>
+      </div>
+
+      <div class="tabla-contenedor">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Código</th>
+              <th scope="col">Nombre completo</th>
+              <th scope="col">Correo electrónico</th>
+              <th scope="col">Materia</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-cuerpo"></tbody>
+        </table>
+      </div>
+      <p id="tabla-vacia" class="nota" hidden>No hay monitores registrados.</p>
+    </section>
+
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor">
+      Ingeniería de Software III &middot; Arquitectura distribuida, multicapa y heterogénea
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

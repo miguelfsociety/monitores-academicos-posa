@@ -1,0 +1,16 @@
+# Lo que no hace falta enviar al contexto de construccion de la imagen.
+.git
+.gitignore
+.gitattributes
+.env
+.env.example
+.dockerignore
+Dockerfile
+docker-compose.yml
+README.md
+**/target/
+**/.idea/
+**/.vscode/
+controlador-java/.mvn/
+controlador-java/mvnw
+controlador-java/mvnw.cmd
