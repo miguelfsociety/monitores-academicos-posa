@@ -1,0 +1,23 @@
+# Servicio PHP intermediario (Broker) - Servidor 2 (PC2)
+name: posa-php
+
+services:
+  servicio-php:
+    build: .
+    image: posa-php-servicio
+    restart: unless-stopped
+    ports:
+      - "${PUERTO:-8081}:80"
+    environment:
+      # URL base del servidor que atiende cada servicio (se leen del archivo .env).
+      SERVICIO_MONITORES_URL: ${SERVICIO_MONITORES_URL}
+      SERVICIO_MATERIAS_URL: ${SERVICIO_MATERIAS_URL}
+    extra_hosts:
+      # Permite usar host.docker.internal cuando todo se prueba en un solo equipo.
+      - "host.docker.internal:host-gateway"
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 10.213.2.0/24
