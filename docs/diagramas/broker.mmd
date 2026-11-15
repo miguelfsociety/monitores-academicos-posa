@@ -1,0 +1,26 @@
+flowchart LR
+    CLI["<b>Cliente</b><br/>Controlador Java<br/>(solo conoce al PHP)"]
+    subgraph BR["<b>Broker</b> · Servicio PHP"]
+        RUT["Tabla de rutas<br/>(método + patrón)"]
+        REG[["Registro de servicios"]]
+        REE["Reenviador (cURL)"]
+        RUT --> REG --> REE
+    end
+    subgraph SRV["<b>Servidor</b> · Servicio Python"]
+        S1["Servicio monitores<br/>/api/monitores"]
+        S2["Servicio materias<br/>/api/materias"]
+    end
+
+    CLI -- "1. Solicitud" --> RUT
+    REE -- "2. Localiza y reenvía" --> S1
+    REE -- "2. Localiza y reenvía" --> S2
+    S1 -. "3-4. Procesa y responde" .-> REE
+    S2 -. "3-4. Procesa y responde" .-> REE
+    REE -. "5. Respuesta" .-> CLI
+
+    classDef cli fill:#dbeafe,stroke:#1d4ed8,color:#0f172a;
+    classDef bro fill:#ede9fe,stroke:#6d28d9,color:#0f172a;
+    classDef ser fill:#dcfce7,stroke:#15803d,color:#0f172a;
+    class CLI cli;
+    class RUT,REG,REE bro;
+    class S1,S2 ser;

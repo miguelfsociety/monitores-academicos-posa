@@ -1,0 +1,26 @@
+flowchart LR
+    U(["Usuario"])
+    V["<b>Vista</b><br/>Interfaz HTML / CSS / JavaScript"]
+    C["<b>Controlador</b><br/>Controlador Java"]
+    subgraph M["<b>Modelo</b>"]
+        PY["Servicio Python<br/>datos y reglas de integridad"]
+        BD[("MySQL")]
+        PY --- BD
+    end
+    PHP{{"Servicio PHP<br/>canal hacia el Modelo (Broker)"}}
+
+    U -- "acción" --> V
+    V -- "1. Solicitud HTTP" --> C
+    C -- "2. Consulta / actualiza datos" --> PHP
+    PHP --> PY
+    C -- "3. Decide la respuesta<br/>(código HTTP + JSON)" --> V
+    V -- "4. Muestra el resultado" --> U
+
+    classDef v fill:#dbeafe,stroke:#1d4ed8,color:#0f172a;
+    classDef c fill:#ede9fe,stroke:#6d28d9,color:#0f172a;
+    classDef m fill:#dcfce7,stroke:#15803d,color:#0f172a;
+    classDef x fill:#f8fafc,stroke:#64748b,color:#0f172a;
+    class V v;
+    class C c;
+    class PY,BD m;
+    class PHP x;

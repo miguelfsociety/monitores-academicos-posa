@@ -1,0 +1,41 @@
+sequenceDiagram
+    autonumber
+    actor U as Usuario
+    participant I as Interfaz<br/>(HTML/CSS/JS)
+    participant J as Controlador Java<br/>(PC1 :8080)
+    participant P as Servicio PHP<br/>(PC2 :8081)
+    participant Y as Servicio Python<br/>(PC3 :8000)
+    participant B as MySQL<br/>(PC3)
+
+    U->>I: Diligencia el formulario y pulsa "Registrar"
+    I->>I: Revisa campos obligatorios y formato de correo
+    I->>J: POST /api/monitores (JSON)
+    J->>J: Asigna X-Request-Id y valida la información básica
+
+    alt Datos incompletos o inválidos
+        J-->>I: 400 Bad Request {error, detalles, origen: "java"}
+        I-->>U: Muestra los campos por corregir
+    else Datos válidos
+        J->>P: POST /api/monitores (JSON, X-Request-Id)
+        P->>P: Busca el servicio "monitores" en el registro
+        P->>Y: POST /api/monitores (JSON, X-Request-Id)
+        Y->>Y: Valida el cuerpo recibido
+        Y->>B: SELECT materia y monitor por código
+        B-->>Y: Resultado
+
+        alt El código ya existe
+            Y-->>P: 409 Conflict {error, origen: "python"}
+            P-->>J: 409 Conflict (misma respuesta)
+            J-->>I: 409 Conflict (misma respuesta)
+            I-->>U: "Ya existe un monitor con ese código"
+        else Código disponible
+            Y->>B: INSERT INTO monitores
+            B-->>Y: Fila insertada
+            Y-->>P: 201 Created (monitor, X-Recorrido: python)
+            P-->>J: 201 Created (monitor, X-Recorrido: php>python)
+            J-->>I: 201 Created (monitor, X-Recorrido: java>php>python)
+            I->>J: GET /api/monitores (recarga la tabla por la misma cadena)
+            J-->>I: 200 OK (lista)
+            I-->>U: Mensaje de éxito, tabla actualizada y recorrido
+        end
+    end

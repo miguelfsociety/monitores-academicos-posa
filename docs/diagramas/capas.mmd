@@ -1,0 +1,24 @@
+flowchart LR
+    subgraph P["Capa de Presentación"]
+        C1["1. Interfaz HTML / CSS / JavaScript"]
+    end
+    subgraph N["Capa de Negocio"]
+        C2["2. Controlador Java<br/>validación básica y coordinación"]
+        C3["3. Servicio PHP<br/>intermediación (sin reglas de negocio)"]
+    end
+    subgraph D["Capa de Datos"]
+        C4["4. Servicio Python<br/>acceso a datos e integridad"]
+        C5[("5. Base de datos MySQL")]
+    end
+
+    C1 <--> C2
+    C2 <--> C3
+    C3 <--> C4
+    C4 <--> C5
+
+    classDef pres fill:#dbeafe,stroke:#1d4ed8,color:#0f172a;
+    classDef neg fill:#ede9fe,stroke:#6d28d9,color:#0f172a;
+    classDef dat fill:#dcfce7,stroke:#15803d,color:#0f172a;
+    class C1 pres;
+    class C2,C3 neg;
+    class C4,C5 dat;
