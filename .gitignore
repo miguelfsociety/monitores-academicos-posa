@@ -1,0 +1,26 @@
+# Material del curso (pesado)
+*.pptx
+
+# Worktrees locales de las ramas de servidor
+.worktrees/
+
+# Entorno y secretos
+.env
+
+# Java / Maven
+target/
+*.class
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Node (render de diagramas)
+node_modules/
+
+# Editores y sistema
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
