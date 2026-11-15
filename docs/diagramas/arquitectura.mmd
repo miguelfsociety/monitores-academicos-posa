@@ -1,36 +1,26 @@
 flowchart LR
-    subgraph N0["Nivel 1 · Equipo cliente"]
-        NAV["<b>1. Interfaz</b><br/>HTML + CSS + JavaScript<br/>(se ejecuta en el navegador)"]
+    subgraph N0["Nivel 1 · Cliente"]
+        NAV["<b>1. Interfaz</b><br/>HTML + CSS + JS<br/>(navegador)"]
+    end
+    subgraph N1["Nivel 2 · PC1"]
+        JAVA["<b>2. Controlador Java</b><br/>Spring Boot<br/>puerto 8080"]
+    end
+    subgraph N2["Nivel 3 · PC2"]
+        PHP["<b>3. Servicio PHP</b><br/>Apache + PHP<br/>puerto 8081"]
+    end
+    subgraph N3["Nivel 4 · PC3"]
+        PY["<b>4. Servicio Python</b><br/>FastAPI<br/>puerto 8000"]
+        BD[("<b>5. Base de datos</b><br/>MySQL<br/>3306 no publicado")]
     end
 
-    subgraph N1["Nivel 2 · PC1 — rama servidor-1-web-java"]
-        JAVA["<b>2. Controlador Java</b><br/>Spring Boot · puerto 8080<br/>valida y coordina"]
-        EST[("Archivos de la interfaz<br/>index.html, estilos.css, app.js")]
-    end
-
-    subgraph N2["Nivel 3 · PC2 — rama servidor-2-php"]
-        PHP["<b>3. Servicio PHP</b><br/>Apache + PHP · puerto 8081<br/>intermediario (Broker)"]
-        REG[["Registro de servicios<br/>monitores → URL<br/>materias → URL"]]
-    end
-
-    subgraph N3["Nivel 4 · PC3 — rama servidor-3-python-bd"]
-        PY["<b>4. Servicio Python</b><br/>FastAPI · puerto 8000<br/>persistencia"]
-        BD[("<b>5. Base de datos</b><br/>MySQL · 3306 no publicado<br/>monitores, materias")]
-    end
-
-    NAV -- "HTTP REST / JSON" --> JAVA
-    JAVA -. "entrega los archivos estáticos" .-> NAV
-    EST --- JAVA
-    JAVA -- "HTTP REST / JSON" --> PHP
-    PHP --- REG
-    PHP -- "HTTP REST / JSON" --> PY
-    PY -- "SQL (red interna de PC3)" --> BD
+    NAV -- "REST<br/>JSON" --> JAVA
+    JAVA -- "REST<br/>JSON" --> PHP
+    PHP -- "REST<br/>JSON" --> PY
+    PY -- "SQL" --> BD
 
     classDef pres fill:#dbeafe,stroke:#1d4ed8,color:#0f172a;
     classDef neg fill:#ede9fe,stroke:#6d28d9,color:#0f172a;
     classDef dat fill:#dcfce7,stroke:#15803d,color:#0f172a;
-    classDef aux fill:#f8fafc,stroke:#64748b,color:#0f172a;
     class NAV pres;
     class JAVA,PHP neg;
     class PY,BD dat;
-    class EST,REG aux;

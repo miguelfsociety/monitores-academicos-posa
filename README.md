@@ -27,6 +27,7 @@ Cada servidor tiene su propia rama. Cada computador clona únicamente la suya.
 | 3 | Implementación funcional del CRUD | Ramas `servidor-1-web-java`, `servidor-2-php` y `servidor-3-python-bd` |
 | 4 | Documentación de endpoints y métodos HTTP | [docs/03-endpoints.md](docs/03-endpoints.md) |
 | 5 | Ventajas y dificultades de la arquitectura distribuida y heterogénea | [docs/04-ventajas-dificultades.md](docs/04-ventajas-dificultades.md) |
+| — | Informe completo en Word | [docs/Informe_Monitores_Academicos.docx](docs/Informe_Monitores_Academicos.docx) |
 
 ## Requerimientos funcionales
 
