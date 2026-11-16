@@ -44,6 +44,22 @@ body {
   border-bottom: 4px solid var(--dorado);
 }
 
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* El escudo es azul sobre fondo transparente: se muestra en un círculo blanco. */
+.logo {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  padding: 5px;
+  background: #ffffff;
+  border-radius: 50%;
+}
+
 .encabezado h1 {
   margin: 0;
   font-size: 1.6rem;
